@@ -1,0 +1,16 @@
+0-0: done
+0-1: adds; the semicolon throws away the result
+0-2: done; see file.0
+0-3: done, i think? The solution says that when placed within string,
+it takes up 7 spaces, but when placed at the beginning of strings, it
+takes up 8. Any daisy-chained tabs within strings will be 8 spaces
+long, after the first one which is 7 spaces long.
+0-4: done
+0-5: needs curly braces.
+0-6: looks weird, but is okay. see experiment
+0-7: does not work, because the first */ confuses the comment, and the
+following statement "as its starting and..." reside outside the
+comments. see file.
+0-8: looks fine! // as comments affect the whole line.
+0-9: int main(){} is the shortest c++ program. needs a main fn.
+0-10: see file. just include \n instead of space.

@@ -1,0 +1,64 @@
+expression: asks to compute something. yields result
+expression contains operators and operands.
+
+<<: is an example of operator
+std::cout, "hello, world" are examples of operands.
+each operands have types.
+
+<< is left associative; means that it uses as much of the expression
+as it can for the left operand.
+
+std::endl is a manipulator.
+manipulators: manipulates stream, does something other than writing
+characters to it. In this case, ends current line of output.
+
+The entire expression yields std::cout as its value. side effect is
+writing "Hello world!" on the std output stream, and ends output line.
+
+--
+
+Scope: part of the program in which a name has meaning.
+namespace: collection of related names. a standard library defines all
+names in namespace std.
+
+The name std::cout is a qualified name, using the '::' operator. ak/
+scope operator. left of '::' is the name of scope; right of '::' is
+name within the scope.
+thus, std::cout means 'name cout that is in namespace scope std'
+
+curly braces are another type of scope.
+
+--
+
+0.8: details
+C++ programs are usually free form; newlines and spaces have no
+special meaning.
+However,
+-string literals (enclosed in double quotes) may not span
+lines.
+-#include name must appear on a line by themselves (except for
+comments)
+-//comments ends at the end of the current line. but /* is free form.
+
+Some string literals with backslash:
+\n: newline
+\t: tab
+\b: backspace
+\": treats as part of string, not as string terminator
+\': treats as part of string. symbol, not terminator
+\\: treats \ as a character.
+
+-
+Every name that a c++ program uses must have definition. Names must be
+defined before used, using #include.
+
+Every C++ program must have a function named main that returns an
+int. 0 return indicates success. nonzero is failure. explicit 0 return
+is not necessary, but is good practice.
+
+Braces enclose a block: a request to execute the consituents in the
+order in which they appear.
+Semicolon at the end of a statement indicates an expression
+statement. this is a request to execute expression for side effects
+and discard its result. omitting it results in null statement, which
+has no effect.

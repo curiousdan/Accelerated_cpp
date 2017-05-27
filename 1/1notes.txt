@@ -1,0 +1,110 @@
+Ch1: working with strings
+1.1 input. See program HWmod.cpp
+Variable is an object that has a name.
+Object is part of computer memory that has a type. It is possible to have objects that don't have names
+
+Must declare name and type of variable.
+The question for entering name doesn't have an endl. The computer will wait on the same screen for input.
+
+std::string name; -- is a definition. variable 'name' is type 'std::string'.
+Because the definition appears within a function body, the 'name' is a local variable, only existing within scope of the curly braces. at the end of the curly braces, the variable 'name' is destroyed and memory freed.
+
+Implicit in object is its interface: collection of operations that we can perform on an object of that type. variable 'name' is a type of 'string'; we are able to do with 'name' whatever the library allows us to do with 'strings'.
+
+During initialization, the std library says every string object starts out with a value. if not provided during initialization, it is empty.
+
+std::cin >> name; -- reads from 'std::cin' into 'name'. The >> reads in a string from standard input and stores into object 'name'. When we ask library to read a string, it begins by discarding whitespace characters from input, then reads the characters into 'name' until another whitespace or EOF is encountered.
+
+The input operation has another side effect: causes the prompt (which asks for user's name) to appear on computer's output device. In general, the i/o library saves its output in a buffer used to optimize output operations. Because it takes lots of time to write to an output, most systems avoid writing in response to each output request, and a buffer is used to accumulate characters to be written, and flushes the buffer to output many operations at once, only when necessary.
+3 events cause a flush: 1) buffer is full: automatic flush. 2) library asked to read fom std input stream: buffer automatically flushed 3)explicit request to flush.
+
+The 'std::endl' is an explicit request to flush buffer: system forced to write output stream immediately. Flushing should be done at opportune moments. Otherwise, some of program's output might languish in buffer for a while before you see it.
+
+--
+
+1.2 Framing a name
+Let's make an elaborate greeting. See Greeting2.cpp
+
+The program first asks for name, similar to previous program.  Variable 'greeting' will contain message. then variable 'spaces' contains as many spaces as number of chars in greeting, and this variable is then used to define a variable named 'second' (second line of output). then variable 'first' is created with as many '*' characters as number of characters in 'second'. 3 new ideas
+
+1)We can give a variable's value as we define it by using an '=' symbol during declaration. If the variable and value have different types, the implementation will convert the initial value to type of the variable. (eg strings and string literals. see ch 10.2)
+
+2)We can use + to concatenate a string and a string literal or two strings. can't concatenate two string literals. We see that the '+' symbol means different here than in '4+7'. When an operator has different meanings for operands of different types, we say that the operator is overloaded.
+
+3)We use 'const' as part of variable's definition. This promises that we are not changing the value of the variable for the rest of its lifetime. The program "gains" nothing by using const. but the program is easier to understand. We must give values for the variable during initialization because we won't be able to later. Note that the value used to initialize the const doesn't itself need to be a constant. eg: we won't know what 'greeting' is until we have input from user. Note 'name' is not a const.
+
+A property of an operator that never changes is its associativity. Remember that '<<' is left-associative. eg cout << s << t is same as (cout << s) << t. Likewise, the '+' and the '>>' operator are also left-associative.
+
+Next, build frame for our greeting.
+std::string spaces(greeting.size(),' ');
+This introduces 3 more ideas.
+
+When we defined 'greeting', we used '=' to initialize. This symbol explicitly says what value we would like the variable to have. In this case, by using parentheses, we tell the implementation to construct the variable (in this case 'spaces') from the expressions, in a way that depends on the type of the variable. Lets try to understand what it means to construct a string from two expressions.
+
+How a variable is constructed depends on its type. We are using two expressions during construction. First expression, 'greeting.size()' is example of calling a member function: 'greeting' has a component 'size', which is a function that can be called to obtain a value. This is because the type 'string' has this function that returns the number of characters in the 'string'. The second expression ' ', is a character literal, which is distinct from string literals. Enclosed in single quotes (vs strings in double quotes). Character literal is built-in type char. Strings literal will be explained in ch 10.2. A character literal represents a single character
+
+Note that special characters in a string literal mean the same meaning in character literals. eg: '\n'.
+
+When we construct string from an int value and char value, the result has as many copies of char value as value of integer
+
+std::string stars(10, '*');
+
+then stars contains "**********" and stars.size() is 10
+
+Thus, spaces contains same number of chars as 'greeting', but those chars are blank. The definition of 'second' is now understandable.
+
+=
+1.3 Details
+
+Types:
+char: built-in type holds ordinary characters as defined by implementation
+
+wchar_t: built-in type holds 'wide characters', like japanese.
+
+String type: is defined in std header <string>. Following are string operations.
+/*
+* defines s as a variable of type std::string that is empty
+*/
+std::string s;
+
+/*
+* Defines t as string type that has copy of characteristics of s. S can be a string or string literal
+*/
+std::string t = s;
+
+/*
+* Defines z as string variable that contains n copies of character c. c must be char.
+*/
+std::string z(n,c);
+
+/*
+*writes characters in s w/o any formatting changes on output stream os. The result of the expression is os
+*/
+os << s
+
+/*
+* Reads and discards characters from input stream is until non-whitespace character is found. reads successive characters from is into s (overwriting s) until next whitespace. result is is
+*/
+is >> s
+
+/*
+* result is a string type that contains characters in s followed by those in t. either s or t, but not both may be a string literal or a value of type char.
+*/
+s + t
+
+/*
+* the number of characters in s
+*/
+s.size()
+
+-
+
+Variables can be defined in 3 ways
+std::string hello = "Hello"; //defined with explicit init value
+std::string stars(100, '*'); //constructs var according to type & given xpressions
+std::string name; // def var w/ implicit initialization, which depends on type.
+
+Variables defined within curly braces are local; will be destroyed and memory returned at the end }.
+Defining a const variable promises that variable's value will not change during its lifetime. must be initialized as part of its definition.
+
+Input: discards any whitespace in the input stream. returns std::cin, which is type istream in order to allow chained input operations.
