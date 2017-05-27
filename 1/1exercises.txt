@@ -1,0 +1,8 @@
+1-0 Done.
+1-1 Both are valid; esp since for the second example we see that it is not all string literals.
+1-2 Second declaration attempts to concatenate two literals together, which is not allowed. Since the + concatenation operator is left associative, we start from the left two operations.. which are two string literals.
+1-3 is valid. the const variable is released back into memory once it reaches the end of its scope, as indicated by the '}'
+1-4 valid; the brackets within the brackets defines a different scope
+1-4_t: FUNKY MAGIC. A const variable can be printed correctly within a nested scope. It can also be redefined as something else within that scope. See wordpress post.
+1-5 invalid; the x is removed from memory when it is called for output. variables can be inherited by inner scopes, but variables cannot expand to larger scopes.
+1-6 the cin second time overwrites the currently held value from the first cin. the variable 'name', therefore is able to serve for both persons' names (if two people are entering their names). If during the first 'input' a name with a space in middle is given (eg 'samuel beckett'), since the first cin will take in until the first whitespace, it will print out samuel. The second cin will take in the next name 'beckett'
