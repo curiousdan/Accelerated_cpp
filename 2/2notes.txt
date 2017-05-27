@@ -1,0 +1,11 @@
+2: Looping and Counting.
+
+2.1: The problem.
+Remember the problem in 1.2, where given a name, the program would write out a greeting with a frame around it. Currently, a change to the output format requires rewriting the program. We want flexibility without having to store each line in a local variable. We approach problem by generating each character in the output separately, except in greeting itself, which is available as a string.
+
+2.2 Overall Structure
+We'll keep the part that asks for name, the part that reads in from console, and the greeting message "Hello" + name + "!". But we will rewrite the part around the frame.
+
+2.3 writing an unknown number of rows.
+
+Think of output as rectangular array. Greeting takes up one row, as do top and bottom rows of the frame (3 rows). We need # of blank rows between greeting and frame. We double this number and add 3 to get the total number of rows in the output.
